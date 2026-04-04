@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.html$\")",
+      "Bash(find d:/projects/jabes/resources/views -name *layout* -o -name *master*)",
+      "Bash(php artisan:*)",
+      "WebFetch(domain:www.jabesconstructors.com)",
+      "Bash(php artisan tinker --execute=\":*)",
+      "Bash(ls -la \"d:/projects/jabes/public_html/cloud/2026/03/31/1774952333_logo \\(4\\) \\(1\\).png\")",
+      "Bash(mv \"1774952333_logo \\(4\\) \\(1\\).png\" \"1774952333_logo-4-1.png\")",
+      "Bash(mv \"1774954597_logo \\(4\\) \\(1\\).png\" \"1774954597_logo-4-1.png\")",
+      "Bash(php --ini)",
+      "Bash(D:/xampp/apache/bin/httpd.exe -k restart)",
+      "Read(//d/projects/**)"
+    ],
+    "additionalDirectories": [
+      "D:\\xampp\\php"
+    ]
+  }
+}
