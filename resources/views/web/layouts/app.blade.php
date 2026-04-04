@@ -115,13 +115,13 @@
 		<!-- Cursor End -->
 
 		<!-- Preloader -->
-		<!-- <div class="preloader">
+		<div class="preloader">
 			<div class="loader">
 				<div class="outer-circle"></div>
 				<div class="inner-circle"></div>
 				<div class="dot"></div>
 			</div>
-		</div> -->
+		</div>
 		<!-- End Preloader -->
 
 		<!-- Main Header -->
@@ -173,11 +173,20 @@
 								<div class="main-header_button">
 									<a href="<?= url('/book-appointment') ?>" class="theme-btn btn-style-three">
 										<span class="btn-wrap">
-											<span class="text-one">Book Appointment <i><img src="<?= url('assets/images/icons/arrow-1.svg') ?>" alt="" /></i></span>
-											<span class="text-two">Book Appointment <i><img src="<?= url('assets/images/icons/arrow-1.svg') ?>" alt="" /></i></span>
+											<span class="text-one">GET A QUOTE <i><img src="<?= url('assets/images/icons/arrow-1.svg') ?>" alt="" /></i></span>
+											<span class="text-two">GET A QUOTE <i><img src="<?= url('assets/images/icons/arrow-1.svg') ?>" alt="" /></i></span>
 										</span>
 									</a>
 								</div>
+
+								<!-- About Widget -->
+								<span class="about-widget">
+									<span class="hamburger">
+										<span class="top-bun"></span>
+										<span class="meat"></span>
+										<span class="bottom-bun"></span>
+									</span>
+								</span>
 
 								<!-- Mobile Navigation Toggler -->
 								<div class="mobile-nav-toggler"><span class="icon fa-classic fa-solid fa-bars fa-fw"></span></div>
@@ -274,7 +283,7 @@
 										<h4 class="main-footer_title" style="color:#fff;">Useful Links</h4>
 										<ul class="main-footer_links">
 											<li><a href="<?= url('/about-us') ?>">About Us</a></li>
-											<li><a href="<?= url('/book-appointment') ?>">Book Appointment</a></li>
+											<li><a href="<?= url('/book-appointment') ?>">GET A QUOTE</a></li>
 											<li><a href="<?= url('/contact-us') ?>">Contact Us</a></li>
 											@if(!empty($siteSettings['portfolio_pdf']))
 											<li><a href="{{ url('cloud/' . $siteSettings['portfolio_pdf']) }}" target="_blank" download><i class="fa fa-file-pdf"></i> Download Portfolio</a></li>
@@ -333,7 +342,7 @@
 		<!-- End Search Popup -->
 
 		<!-- Color Palate / Color Switcher -->
-		<!-- <div class="color-palate">
+		<div class="color-palate">
 			<div class="color-trigger">
 				<i class="fa fa-solid fa-gear fa-fw"></i>
 			</div>
@@ -370,7 +379,7 @@
 					<li>No</li>
 				</ul>
 			</div>
-		</div> -->
+		</div>
 
 	</div>
 	<!-- End PageWrapper -->

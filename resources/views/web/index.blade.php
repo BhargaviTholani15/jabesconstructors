@@ -57,6 +57,9 @@
 											<span class="text-two">Work With Us</span>
 										</span>
 									</a>
+									<div class="slider-one_video">
+										<a href="<?= url('/projects') ?>" class="play-box"><span class="fa fa-play"></span></a>
+									</div>
 								</div>
 								<div class="slider-one_arrow" style="background-image:url(<?= url('assets/images/main-slider/vector-2.png') ?>)"></div>
 							</div>
@@ -81,6 +84,24 @@
 			<div class="button">
 				<a class="service-btn" href="<?= url('/about-us') ?>">More About Us <i class="fa-arrow-right"></i></a>
 			</div>
+			@if(isset($testimonials) && count($testimonials) > 0)
+			<a href="#testimonial-section" class="slider-two_authors" style="text-decoration:none; cursor:pointer;">
+				<ul>
+					@foreach($testimonials->take(4) as $t)
+					<li>
+						@if($t->image_path)
+						<img src="{{ url('cloud/' . $t->image_path) }}" alt="{{ $t->name }}" />
+						@else
+						<img src="<?= url('assets/images/main-slider/author-1.png') ?>" alt="{{ $t->name }}" />
+						@endif
+					</li>
+					@endforeach
+				</ul>
+				<div class="slider-two_reviews">
+					{{ count($testimonials) }}+ <br> <span>Client Reviews</span>
+				</div>
+			</a>
+			@endif
 		</div>
 
 	</section>

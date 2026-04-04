@@ -1,6 +1,6 @@
 <!-- Testimonial One -->
 @if(isset($testimonials) && count($testimonials) > 0)
-<section class="testimonial-one">
+<section class="testimonial-one" id="testimonial-section">
 	<div class="testimonial-one_circle"></div>
 	<div class="auto-container">
 		<div class="d-flex justify-content-between align-items-center flex-wrap">
