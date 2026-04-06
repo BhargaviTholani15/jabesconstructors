@@ -114,7 +114,7 @@
 		<div class="auto-container">
 			<div class="sec-title title-anim">
 				<div class="sec-title_title">WHO WE ARE</div>
-				<h2 class="sec-title_heading">EM Building Contractors, LLC — Building Excellence Since 2011</h2>
+				<h2 class="sec-title_heading">EM Building Contractors, LLC — Building Excellence Since 2018</h2>
 			</div>
 
 			<div class="row clearfix">
@@ -152,7 +152,7 @@
 					<div class="about-one_content-outer">
 						<div class="feature-block_one">
 							<h4 class="feature-block_one-title">Our Story</h4>
-							<div class="feature-block_one-text">Founded in 2011 by Erick Mendez with over 25 years of construction experience, EM Building Contractors, LLC has grown into one of the most reliable contracting companies in Texas.</div>
+							<div class="feature-block_one-text">Founded in 2018 by Erick Mendez with over 25 years of construction experience, EM Building Contractors, LLC has grown into one of the most reliable contracting companies in Texas.</div>
 						</div>
 						<div class="feature-block_one">
 							<h4 class="feature-block_one-title">Our Mission</h4>
@@ -383,7 +383,7 @@
 				<div class="counter-block_one col-lg-3 col-md-6 col-sm-12">
 					<div class="counter-block_one-inner wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
 						<div class="counter-block_one-outline"></div>
-						<div class="counter-block_one-count"><span class="odometer" data-count="14"></span><sup>+</sup></div>
+						<div class="counter-block_one-count"><span class="odometer" data-count="8"></span><sup>+</sup></div>
 						<div class="counter-block_one-text">years as <br> company</div>
 					</div>
 				</div>

@@ -12,8 +12,8 @@ class ServiceController extends Controller
     public function index()
     {
         $data = DB::table('services')
-            ->where("active_flag", 1)
             ->where("type", "service")
+            ->orderByRaw('order_no IS NULL, order_no ASC')
             ->orderByDesc("created_at")
             ->get();
         if ($data) {
@@ -85,6 +85,20 @@ class ServiceController extends Controller
             return redirect('_admin/secure/services')->with('success', 'New services Inserted');
         }
         return back()->withInput()->with('error', 'Plese try Again');
+    }
+
+    public function updateOrder(Request $request, $id)
+    {
+        DB::table('services')->where('id', $id)->update(['order_no' => $request->input('order_no')]);
+        return redirect('_admin/secure/services')->with('success', 'Order updated');
+    }
+
+    public function toggleStatus($id)
+    {
+        $service = DB::table('services')->where('id', $id)->first();
+        $newStatus = $service->active_flag == 1 ? 0 : 1;
+        DB::table('services')->where('id', $id)->update(['active_flag' => $newStatus]);
+        return redirect('_admin/secure/services')->with('success', $newStatus ? 'Service activated' : 'Service deactivated');
     }
 
     public function delete($id)

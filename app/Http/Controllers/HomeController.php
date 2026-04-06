@@ -19,8 +19,9 @@ class HomeController extends Controller
         $services = DB::table('services')
             ->where('active_flag', '1')
             ->where('type', 'service')
-            ->limit(8)
+            ->orderByRaw('order_no IS NULL, order_no ASC')
             ->orderByDesc("created_at")
+            ->limit(8)
             ->get();
         $blogs = DB::table('blogs')
             ->where('active_flag', '1')
@@ -96,6 +97,7 @@ class HomeController extends Controller
         $services = DB::table('services')
             ->where('active_flag', 1)
             ->where('type', 'service')
+            ->orderByRaw('order_no IS NULL, order_no ASC')
             ->orderByDesc('created_at')
             ->get();
         return $this->wrapView('web/book-appointment', ['services' => $services]);
@@ -159,6 +161,7 @@ class HomeController extends Controller
         $data = DB::table('services')
             ->where('active_flag', '1')
             ->where('type', 'service')
+            ->orderByRaw('order_no IS NULL, order_no ASC')
             ->orderByDesc("created_at")
             ->get();
         return $this->wrapView('web/services/list', [
@@ -176,6 +179,7 @@ class HomeController extends Controller
         $allServices = DB::table('services')
             ->where('active_flag', '1')
             ->where('type', 'service')
+            ->orderByRaw('order_no IS NULL, order_no ASC')
             ->orderByDesc("created_at")
             ->get();
         return $this->wrapView('web/services/details', [

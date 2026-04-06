@@ -57,7 +57,7 @@
 		<div class="auto-container">
 			<div class="sec-title title-anim">
 				<div class="sec-title_title">WHO WE ARE</div>
-				<h2 class="sec-title_heading">EM Building Contractors, LLC — Building Excellence Since 2011</h2>
+				<h2 class="sec-title_heading">EM Building Contractors, LLC — Building Excellence Since 2018</h2>
 			</div>
 
 			<div class="row clearfix">
@@ -95,7 +95,7 @@
 					<div class="about-one_content-outer">
 						<div class="feature-block_one">
 							<h4 class="feature-block_one-title">Our Story</h4>
-							<div class="feature-block_one-text">EM Building Contractors, LLC is the brainchild of Erick Mendez, who has been in the construction industry for over 25 years. Founded in 2011, the company has grown into one of the most reliable contracting firms in Texas with a long history of satisfied clients.</div>
+							<div class="feature-block_one-text">EM Building Contractors, LLC is the brainchild of Erick Mendez, who has been in the construction industry for over 25 years. Founded in 2018, the company has grown into one of the most reliable contracting firms in Texas with a long history of satisfied clients.</div>
 						</div>
 						<div class="feature-block_one">
 							<h4 class="feature-block_one-title">Our Mission</h4>
@@ -143,7 +143,7 @@
 							<div style="color:var(--main-color); font-size:18px; font-weight:600; margin-bottom:20px;">CEO & Founder</div>
 						</div>
 						<p style="color:rgba(255,255,255,0.8); font-size:16px; line-height:30px; margin-bottom:20px;">This company is the brainchild of Erick Mendez, who has been in the construction industry for over 25 years now. He has been a major part of many successful projects, from residential and commercial to industrial and public works. The team is dedicated to providing quality work and services, which is why they have a long history of satisfied clients.</p>
-						<p style="color:rgba(255,255,255,0.8); font-size:16px; line-height:30px; margin-bottom:20px;">Before starting his own company, Erick worked on numerous construction projects and gained experience in Project Management for more than 25 years. The company was started in 2011. Since then, it has continued to grow and evolve into one of the most reliable contracting companies.</p>
+						<p style="color:rgba(255,255,255,0.8); font-size:16px; line-height:30px; margin-bottom:20px;">Before starting his own company, Erick worked on numerous construction projects and gained experience in Project Management for more than 25 years. The company was started in 2018. Since then, it has continued to grow and evolve into one of the most reliable contracting companies.</p>
 						<p style="color:rgba(255,255,255,0.8); font-size:16px; line-height:30px; margin-bottom:30px;">They are always looking to grow in the field and are open to potential partnerships. If you have a project in mind, contact them to see how they can help bring your idea to life.</p>
 						<div class="d-flex align-items-center flex-wrap" style="gap:20px;">
 							<a href="<?= url('/contact-us') ?>" class="theme-btn btn-style-one">
@@ -228,7 +228,7 @@
 						<div class="sec-title title-anim">
 							<div class="sec-title_title">OUR JOURNEY</div>
 							<h2 class="sec-title_heading">Journey of EM Building Contractors</h2>
-							<div class="sec-title_text">Before starting his own company, Erick Mendez worked on numerous construction projects and gained experience in Project Management for more than 25 years. The company was started in 2011 and has continued to grow into one of the most reliable contracting companies in Texas.</div>
+							<div class="sec-title_text">Before starting his own company, Erick Mendez worked on numerous construction projects and gained experience in Project Management for more than 25 years. The company was started in 2018 and has continued to grow into one of the most reliable contracting companies in Texas.</div>
 						</div>
 						<ul class="about-three_list">
 							<li><i class="fa-classic fa-solid fa-circle-check fa-fw"></i>Delivered 2 Million+ Sq. Ft. of Projects</li>
@@ -274,7 +274,7 @@
 						</div>
 						<div class="about-three_award">
 							<span><img src="<?= url('assets/images/icons/award.svg') ?>" alt="" /></span>
-							Since 2011 <br> Trusted in Texas
+							Since 2018 <br> Trusted in Texas
 						</div>
 					</div>
 				</div>
@@ -311,9 +311,9 @@
 				</div>
 				<div class="counter-block_three col-lg-3 col-md-6 col-sm-12">
 					<div class="counter-block_three-inner wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
-						<div class="counter-block_three-count"><span class="odometer" data-count="14"></span>+</div>
+						<div class="counter-block_three-count"><span class="odometer" data-count="8"></span>+</div>
 						<h4 class="counter-block_three-title">Years as Company</h4>
-						<div class="counter-block_three-text">Founded in 2011, growing stronger every year.</div>
+						<div class="counter-block_three-text">Founded in 2018, growing stronger every year.</div>
 					</div>
 				</div>
 			</div>
@@ -356,7 +356,7 @@
 				<div class="counter-block_one col-lg-3 col-md-6 col-sm-12">
 					<div class="counter-block_one-inner wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
 						<div class="counter-block_one-outline"></div>
-						<div class="counter-block_one-count"><span class="odometer" data-count="14"></span><sup>+</sup></div>
+						<div class="counter-block_one-count"><span class="odometer" data-count="8"></span><sup>+</sup></div>
 						<div class="counter-block_one-text">years as <br> company</div>
 					</div>
 				</div>

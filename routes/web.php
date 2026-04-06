@@ -97,6 +97,8 @@ Route::prefix('_admin')->group(function () {
             Route::get('add/{id?}', [ServiceController::class, 'add']);
             Route::post('add/{id?}', [ServiceController::class, 'save']);
             Route::get('delete/{id}', [ServiceController::class, 'delete']);
+            Route::post('order/{id}', [ServiceController::class, 'updateOrder']);
+            Route::get('toggle/{id}', [ServiceController::class, 'toggleStatus']);
         });
           Route::prefix('project-categories')->group(function () {
             Route::get('', [ProjectCategoryController::class, 'index']);
