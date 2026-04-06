@@ -150,10 +150,24 @@
 									</div>
 
 									<div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
+										@php
+											$menuServices = \Illuminate\Support\Facades\DB::table('services')
+												->where('active_flag', 1)
+												->where('type', 'service')
+												->orderByRaw('order_no IS NULL, order_no ASC')
+												->get();
+										@endphp
 										<ul class="navigation clearfix">
 											<li><a href="<?= url('/') ?>">Home</a></li>
 											<li><a href="<?= url('/about-us') ?>">About Us</a></li>
-											<li><a href="<?= url('/services') ?>">Services</a></li>
+											<li class="dropdown"><a href="<?= url('/services') ?>">Services</a>
+												<ul>
+													<li><a href="<?= url('/services') ?>"><strong>All Services</strong></a></li>
+													@foreach($menuServices as $ms)
+													<li><a href="{{ url('/services/' . $ms->slug) }}">{{ $ms->service_title }}</a></li>
+													@endforeach
+												</ul>
+											</li>
 											<li><a href="<?= url('/projects') ?>">Projects</a></li>
 											<li><a href="<?= url('/faqs') ?>">FAQ's</a></li>
 											<li><a href="<?= url('/blogs') ?>">Blogs</a></li>

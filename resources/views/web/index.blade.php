@@ -165,7 +165,7 @@
 									<div class="feature-block_two-icon">
 										<i><img src="<?= url('assets/images/icons/feature-1.svg') ?>" alt="" /></i>
 									</div>
-									<div class="feature-block_two_count"><span class="odometer" data-count="2"></span>M<sup>+</sup></div>
+									<div class="feature-block_two_count"><span class="odometer" data-count="2.5"></span>M<sup>+</sup></div>
 									<div class="feature-block_two_text">Sq. Ft. of projects</div>
 								</div>
 							</div>
@@ -258,19 +258,16 @@
 
 			<div class="project-style-one-items">
 
-				<!-- Project Block One -->
+				<!-- Project Block One - Restaurant -->
 				<div class="project-block_one">
 					<div class="project-block_one-inner">
 						<div class="project-block_one-image">
-							<img src="<?= url('assets/images/gallery/1.jpg') ?>" alt="" />
+							<img src="<?= url('assets/images/gallery/1.jpg') ?>" alt="Restaurant Construction" />
 							<div class="project-block_one-overlay">
 								<div class="project-block_one-overlay_inner" style="background-image:url(<?= url('assets/images/background/project-1.png') ?>)">
-									<div class="d-flex justify-content-between align-items-center flex-wrap">
-										<div class="project-block_one-title">Commercial</div>
-										<div class="project-block_one-location"><i class="icon"><img src="<?= url('assets/images/icons/location.svg') ?>" alt="" /></i> Garland, Texas</div>
-									</div>
-									<h3 class="project-block_one-heading"><a href="<?= url('/projects') ?>">Work With <br> Energetic Team</a></h3>
-									<div class="project-block_one-text">EM Building Contractors delivers quality construction with attention to detail, timely delivery, and superior craftsmanship.</div>
+									<div class="project-block_one-title">Restaurant</div>
+									<h3 class="project-block_one-heading"><a href="<?= url('/projects') ?>">Modern Restaurant <br> Build-Out</a></h3>
+									<div class="project-block_one-text">Complete interior framing, drywall finishing, and custom build-outs for restaurant spaces designed to impress.</div>
 									<a href="<?= url('/projects') ?>" class="project-block_one-arrow">
 										<i class="fa-classic fa-solid fa-arrow-right fa-fw"></i>
 									</a>
@@ -280,19 +277,16 @@
 					</div>
 				</div>
 
-				<!-- Project Block One -->
+				<!-- Project Block One - Multi-Family -->
 				<div class="project-block_one style-two">
 					<div class="project-block_one-inner">
 						<div class="project-block_one-image">
-							<img src="<?= url('assets/images/gallery/2.jpg') ?>" alt="" />
+							<img src="<?= url('assets/images/gallery/2.jpg') ?>" alt="Multi-Family Housing" />
 							<div class="project-block_one-overlay">
 								<div class="project-block_one-overlay_inner" style="background-image:url(<?= url('assets/images/background/project-1.png') ?>)">
-									<div class="d-flex justify-content-between align-items-center flex-wrap">
-										<div class="project-block_one-title">Multi-Family</div>
-										<div class="project-block_one-location"><i class="icon"><img src="<?= url('assets/images/icons/location.svg') ?>" alt="" /></i> Dallas, Texas</div>
-									</div>
-									<h3 class="project-block_one-heading"><a href="<?= url('/projects') ?>">Mixed-Use <br> Development</a></h3>
-									<div class="project-block_one-text">From residential to commercial projects, we deliver strength, precision, and trust in every structure.</div>
+									<div class="project-block_one-title">Multi-Family</div>
+									<h3 class="project-block_one-heading"><a href="<?= url('/projects') ?>">Luxury Apartment <br> Complex</a></h3>
+									<div class="project-block_one-text">Full-scale wood and metal framing with gypsum concrete underlayment for multi-story housing developments.</div>
 									<a href="<?= url('/projects') ?>" class="project-block_one-arrow">
 										<i class="fa-classic fa-solid fa-arrow-right fa-fw"></i>
 									</a>
@@ -302,19 +296,16 @@
 					</div>
 				</div>
 
-				<!-- Project Block One -->
+				<!-- Project Block One - Retail -->
 				<div class="project-block_one">
 					<div class="project-block_one-inner">
 						<div class="project-block_one-image">
-							<img src="<?= url('assets/images/gallery/3.jpg') ?>" alt="" />
+							<img src="<?= url('assets/images/gallery/3.jpg') ?>" alt="Retail Shell Building" />
 							<div class="project-block_one-overlay">
 								<div class="project-block_one-overlay_inner" style="background-image:url(<?= url('assets/images/background/project-1.png') ?>)">
-									<div class="d-flex justify-content-between align-items-center flex-wrap">
-										<div class="project-block_one-title">Residential</div>
-										<div class="project-block_one-location"><i class="icon"><img src="<?= url('assets/images/icons/location.svg') ?>" alt="" /></i> Sherman, Texas</div>
-									</div>
-									<h3 class="project-block_one-heading"><a href="<?= url('/projects') ?>">Premier Office <br> Tower</a></h3>
-									<div class="project-block_one-text">Building spaces you can rely on for years with quality craftsmanship and modern design.</div>
+									<div class="project-block_one-title">Retail / Shell Building</div>
+									<h3 class="project-block_one-heading"><a href="<?= url('/projects') ?>">Retail Space <br> Shell Construction</a></h3>
+									<div class="project-block_one-text">Ground-up shell building and tenant improvement construction for retail centers and shopping complexes.</div>
 									<a href="<?= url('/projects') ?>" class="project-block_one-arrow">
 										<i class="fa-classic fa-solid fa-arrow-right fa-fw"></i>
 									</a>
@@ -324,19 +315,16 @@
 					</div>
 				</div>
 
-				<!-- Project Block One -->
+				<!-- Project Block One - Commercial Office -->
 				<div class="project-block_one style-two">
 					<div class="project-block_one-inner">
 						<div class="project-block_one-image">
-							<img src="<?= url('assets/images/gallery/4.jpg') ?>" alt="" />
+							<img src="<?= url('assets/images/gallery/4.jpg') ?>" alt="Commercial Office" />
 							<div class="project-block_one-overlay">
 								<div class="project-block_one-overlay_inner" style="background-image:url(<?= url('assets/images/background/project-1.png') ?>)">
-									<div class="d-flex justify-content-between align-items-center flex-wrap">
-										<div class="project-block_one-title">Residential</div>
-										<div class="project-block_one-location"><i class="icon"><img src="<?= url('assets/images/icons/location.svg') ?>" alt="" /></i> Austin, Texas</div>
-									</div>
-									<h3 class="project-block_one-heading"><a href="<?= url('/projects') ?>">Greenview <br> Apartments</a></h3>
-									<div class="project-block_one-text">Dependable construction services with attention to detail and superior quality on every project.</div>
+									<div class="project-block_one-title">Commercial Office</div>
+									<h3 class="project-block_one-heading"><a href="<?= url('/projects') ?>">Corporate Office <br> Renovation</a></h3>
+									<div class="project-block_one-text">Complete office renovation including metal framing, drywall, roofing, and modern interior finishing.</div>
 									<a href="<?= url('/projects') ?>" class="project-block_one-arrow">
 										<i class="fa-classic fa-solid fa-arrow-right fa-fw"></i>
 									</a>
@@ -362,7 +350,7 @@
 				<div class="counter-block_one col-lg-3 col-md-6 col-sm-12">
 					<div class="counter-block_one-inner wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
 						<div class="counter-block_one-outline"></div>
-						<div class="counter-block_one-count"><span class="odometer" data-count="2"></span>M<sup>+</sup></div>
+						<div class="counter-block_one-count"><span class="odometer" data-count="2.5"></span>M<sup>+</sup></div>
 						<div class="counter-block_one-text">sq. ft. <br> delivered</div>
 					</div>
 				</div>
@@ -383,8 +371,8 @@
 				<div class="counter-block_one col-lg-3 col-md-6 col-sm-12">
 					<div class="counter-block_one-inner wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
 						<div class="counter-block_one-outline"></div>
-						<div class="counter-block_one-count"><span class="odometer" data-count="8"></span><sup>+</sup></div>
-						<div class="counter-block_one-text">years as <br> company</div>
+						<div class="counter-block_one-count"><span class="odometer" data-count="400"></span><sup>+</sup></div>
+						<div class="counter-block_one-text">completed <br> projects</div>
 					</div>
 				</div>
 			</div>

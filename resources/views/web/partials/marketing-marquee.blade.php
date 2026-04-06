@@ -23,7 +23,7 @@
 			<h1 class="{{ $mi % 2 != 0 ? 'light' : '' }}">{{ $mTitle }}</h1>
 			<span class="marketing-one_icon"><img src="{{ url('assets/images/icons/star-1.png') }}" alt="" /></span>
 			@endforeach
-			<h1 class="light">EM Building Contractors</h1>
+			<!-- <h1 class="light">EM Building Contractors</h1> -->
 		</div>
 	</div>
 </section>

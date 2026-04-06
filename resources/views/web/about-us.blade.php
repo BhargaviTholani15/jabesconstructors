@@ -108,7 +108,7 @@
 									<div class="feature-block_two-icon">
 										<i><img src="<?= url('assets/images/icons/feature-1.svg') ?>" alt="" /></i>
 									</div>
-									<div class="feature-block_two_count"><span class="odometer" data-count="2"></span>M<sup>+</sup></div>
+									<div class="feature-block_two_count"><span class="odometer" data-count="2.5"></span>M<sup>+</sup></div>
 									<div class="feature-block_two_text">Sq. Ft. of projects</div>
 								</div>
 							</div>
@@ -131,58 +131,132 @@
 	<!-- End About One -->
 
 	<!-- CEO Section -->
-	<section class="ceo-section" style="padding:100px 0; background:#111;">
+	<style>
+		.ceo-section { padding:100px 0; background:#f8f8f8; position:relative; overflow:hidden; }
+		.ceo-section::before { content:''; position:absolute; top:-50px; left:-50px; width:200px; height:200px; border:30px solid rgba(16,15,134,0.04); border-radius:50%; }
+		.ceo-section::after { content:''; position:absolute; bottom:-80px; right:-80px; width:300px; height:300px; border:30px solid rgba(16,15,134,0.04); border-radius:50%; }
+		.ceo-bg-icon { position:absolute; color:rgba(16,15,134,0.03); font-size:120px; z-index:0; }
+		.ceo-bg-icon.i1 { top:40px; right:10%; }
+		.ceo-bg-icon.i2 { bottom:60px; left:5%; }
+		.ceo-bg-icon.i3 { top:50%; right:30%; }
+		.ceo-card { background:#fff; border-radius:25px; padding:50px; box-shadow:0 10px 60px rgba(0,0,0,0.08); position:relative; z-index:1; }
+		.ceo-subtitle { color:var(--main-color); font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:3px; margin-bottom:10px; }
+		.ceo-name { font-size:38px; font-weight:800; color:#111; margin-bottom:5px; }
+		.ceo-role { display:inline-block; font-size:15px; font-weight:600; color:var(--main-color); background:rgba(16,15,134,0.08); padding:6px 18px; border-radius:30px; margin-bottom:25px; }
+		.ceo-text { color:#555; font-size:15px; line-height:28px; margin-bottom:15px; }
+		.ceo-stats { display:flex; gap:30px; padding:25px 0; margin:20px 0; border-top:1px solid #eee; border-bottom:1px solid #eee; }
+		.ceo-stat { text-align:center; flex:1; }
+		.ceo-stat-num { font-size:28px; font-weight:800; color:var(--main-color); }
+		.ceo-stat-label { font-size:12px; color:#888; text-transform:uppercase; letter-spacing:1px; margin-top:3px; }
+		.ceo-social a { width:36px; height:36px; line-height:36px; text-align:center; border-radius:50%; color:#fff; background:var(--main-color); font-size:13px; display:inline-block; margin-right:6px; transition:all 0.3s; }
+		.ceo-social a:hover { background:#111; transform:translateY(-3px); }
+		.ceo-btn { display:inline-block; padding:14px 35px; background:var(--main-color); color:#fff; font-size:15px; font-weight:600; border-radius:50px; text-transform:uppercase; letter-spacing:1px; transition:all 0.4s ease; border:2px solid var(--main-color); }
+		.ceo-btn:hover { background:#111; border-color:#111; color:#fff; transform:translateY(-3px); box-shadow:0 10px 25px rgba(0,0,0,0.2); }
+		.ceo-btn i { margin-left:8px; transition:transform 0.3s; }
+		.ceo-btn:hover i { transform:translateX(5px); }
+		.ceo-img-wrap { position:relative; perspective:1000px; }
+		.ceo-img-wrap img { width:100%; border-radius:20px; transition:transform 0.6s ease, box-shadow 0.6s ease; }
+		.ceo-img-wrap:hover img { transform:scale(1.02) rotateY(-2deg); box-shadow:0 20px 50px rgba(16,15,134,0.2); }
+		.ceo-img-reveal img { display:block; transform:scale(0.8); opacity:0; transition:transform 1s ease, opacity 1s ease; border-radius:20px; }
+		.ceo-img-reveal.revealed img { transform:scale(1); opacity:1; }
+		.ceo-badge { position:absolute; bottom:20px; left:20px; background:#fff; padding:15px 20px; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.15); transition:transform 0.4s ease; }
+		.ceo-img-wrap:hover .ceo-badge { transform:translateY(-5px); }
+		.ceo-img-wrap:hover .ceo-since { transform:translateY(-5px); }
+		.ceo-badge-num { font-size:24px; font-weight:800; color:var(--main-color); line-height:1; }
+		.ceo-badge-text { font-size:11px; font-weight:600; color:#666; text-transform:uppercase; letter-spacing:1px; }
+		.ceo-since { position:absolute; top:20px; right:20px; background:var(--main-color); color:#fff; padding:8px 16px; border-radius:8px; font-size:12px; font-weight:600; letter-spacing:1px; transition:transform 0.4s ease; }
+	</style>
+	<section class="ceo-section">
+		<!-- Background Icons -->
+		<i class="ceo-bg-icon i1 fa-solid fa-helmet-safety"></i>
+		<i class="ceo-bg-icon i2 fa-solid fa-building"></i>
+		<i class="ceo-bg-icon i3 fa-solid fa-hard-hat"></i>
 		<div class="auto-container">
-			<div class="row clearfix align-items-center">
-				<!-- Left Content -->
-				<div class="col-lg-6 col-md-12 col-sm-12">
-					<div style="padding-right:40px;">
-						<div class="sec-title">
-							<div class="sec-title_title" style="color:var(--main-color);">Meet Our Founder</div>
-							<h2 class="sec-title_heading" style="color:#fff;">Erick Mendez</h2>
-							<div style="color:var(--main-color); font-size:18px; font-weight:600; margin-bottom:20px;">CEO & Founder</div>
-						</div>
-						<p style="color:rgba(255,255,255,0.8); font-size:16px; line-height:30px; margin-bottom:20px;">This company is the brainchild of Erick Mendez, who has been in the construction industry for over 25 years now. He has been a major part of many successful projects, from residential and commercial to industrial and public works. The team is dedicated to providing quality work and services, which is why they have a long history of satisfied clients.</p>
-						<p style="color:rgba(255,255,255,0.8); font-size:16px; line-height:30px; margin-bottom:20px;">Before starting his own company, Erick worked on numerous construction projects and gained experience in Project Management for more than 25 years. The company was started in 2018. Since then, it has continued to grow and evolve into one of the most reliable contracting companies.</p>
-						<p style="color:rgba(255,255,255,0.8); font-size:16px; line-height:30px; margin-bottom:30px;">They are always looking to grow in the field and are open to potential partnerships. If you have a project in mind, contact them to see how they can help bring your idea to life.</p>
-						<div class="d-flex align-items-center flex-wrap" style="gap:20px;">
-							<a href="<?= url('/contact-us') ?>" class="theme-btn btn-style-one">
-								<span class="btn-wrap">
-									<span class="text-one">Get In Touch</span>
-									<span class="text-two">Get In Touch</span>
-								</span>
-							</a>
-							<div class="d-flex" style="gap:12px;">
-								@if(!empty($siteSettings['facebook']))<a href="{{ $siteSettings['facebook'] }}" target="_blank" style="width:40px; height:40px; line-height:40px; text-align:center; border:1px solid rgba(255,255,255,0.3); border-radius:50%; color:#fff; font-size:14px;"><i class="fa-brands fa-facebook-f"></i></a>@endif
-								@if(!empty($siteSettings['instagram']))<a href="{{ $siteSettings['instagram'] }}" target="_blank" style="width:40px; height:40px; line-height:40px; text-align:center; border:1px solid rgba(255,255,255,0.3); border-radius:50%; color:#fff; font-size:14px;"><i class="fa-brands fa-instagram"></i></a>@endif
-								@if(!empty($siteSettings['linkedin']))<a href="{{ $siteSettings['linkedin'] }}" target="_blank" style="width:40px; height:40px; line-height:40px; text-align:center; border:1px solid rgba(255,255,255,0.3); border-radius:50%; color:#fff; font-size:14px;"><i class="fa-brands fa-linkedin-in"></i></a>@endif
-								@if(!empty($siteSettings['youtube']))<a href="{{ $siteSettings['youtube'] }}" target="_blank" style="width:40px; height:40px; line-height:40px; text-align:center; border:1px solid rgba(255,255,255,0.3); border-radius:50%; color:#fff; font-size:14px;"><i class="fa-brands fa-youtube"></i></a>@endif
+			<div class="ceo-card">
+				<div class="row clearfix align-items-center">
+					<!-- Image -->
+					<div class="col-lg-5 col-md-12 col-sm-12">
+						<div class="ceo-img-wrap" style="position:relative;">
+							<div class="ceo-img-reveal">
+								<img src="<?= url('assets/images/resource/ceo.jpg') ?>" alt="Erick Mendez - CEO & Founder" />
 							</div>
+							<div class="ceo-badge wow fadeInLeft" data-wow-delay="800ms">
+								<div class="ceo-badge-num">25+</div>
+								<div class="ceo-badge-text">Years Exp.</div>
+							</div>
+							<div class="ceo-since wow fadeInRight" data-wow-delay="800ms">Since 2018</div>
 						</div>
 					</div>
-				</div>
-				<!-- Right Image -->
-				<div class="col-lg-6 col-md-12 col-sm-12">
-					<div style="position:relative;">
-						<img src="<?= url('assets/images/resource/ceo.jpg') ?>" alt="Erick Mendez - CEO" style="width:100%; border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,0.3);" />
-						<div style="position:absolute; bottom:-20px; left:-20px; background:var(--main-color); color:#fff; padding:20px 30px; border-radius:10px; font-weight:700; font-size:18px;">
-							25+ Years <br><span style="font-weight:400; font-size:14px;">of Experience</span>
+					<!-- Content -->
+					<div class="col-lg-7 col-md-12 col-sm-12">
+						<div style="padding-left:30px;">
+							<div class="ceo-subtitle wow fadeInUp" data-wow-delay="200ms">Meet Our Founder</div>
+							<h2 class="ceo-name wow fadeInUp" data-wow-delay="300ms">Erick Mendez</h2>
+							<div class="ceo-role wow fadeInUp" data-wow-delay="400ms">CEO & Founder</div>
+							<p class="ceo-text wow fadeInUp" data-wow-delay="500ms">This company is the brainchild of Erick Mendez, who has been in the construction industry for over 25 years now. He has been a major part of many successful projects, from residential and commercial to industrial and public works.</p>
+							<p class="ceo-text wow fadeInUp" data-wow-delay="600ms">Before starting his own company, Erick worked on numerous construction projects and gained experience in Project Management for more than 25 years. The company was started in 2018 and has continued to grow into one of the most reliable contracting companies.</p>
+							<p class="ceo-text wow fadeInUp" data-wow-delay="700ms">They are always looking to grow in the field and are open to potential partnerships. If you have a project in mind, contact them to see how they can help bring your idea to life.</p>
+
+							<div class="ceo-stats wow fadeInUp" data-wow-delay="800ms">
+								<div class="ceo-stat">
+									<div class="ceo-stat-num"><span class="odometer" data-count="25">0</span>+</div>
+									<div class="ceo-stat-label">Years Exp.</div>
+								</div>
+								<div class="ceo-stat">
+									<div class="ceo-stat-num"><span class="odometer" data-count="400">0</span>+</div>
+									<div class="ceo-stat-label">Projects</div>
+								</div>
+								<div class="ceo-stat">
+									<div class="ceo-stat-num"><span class="odometer" data-count="2.5">0</span>M+</div>
+									<div class="ceo-stat-label">Sq. Ft.</div>
+								</div>
+							</div>
+
+							<div class="d-flex align-items-center flex-wrap wow fadeInUp" data-wow-delay="900ms" style="gap:15px;">
+								<a href="<?= url('/contact-us') ?>" class="ceo-btn">Get In Touch <i class="fa-solid fa-arrow-right"></i></a>
+								<div class="ceo-social">
+									@if(!empty($siteSettings['facebook']))<a href="{{ $siteSettings['facebook'] }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>@endif
+									@if(!empty($siteSettings['instagram']))<a href="{{ $siteSettings['instagram'] }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>@endif
+									@if(!empty($siteSettings['linkedin']))<a href="{{ $siteSettings['linkedin'] }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>@endif
+									@if(!empty($siteSettings['youtube']))<a href="{{ $siteSettings['youtube'] }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>@endif
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<script>
+	var ceoObserver = new IntersectionObserver(function(entries) {
+		entries.forEach(function(entry) {
+			if (entry.isIntersecting) {
+				entry.target.classList.add('revealed');
+				ceoObserver.unobserve(entry.target);
+			}
+		});
+	}, { threshold: 0.3 });
+	document.querySelectorAll('.ceo-img-reveal').forEach(function(el) { ceoObserver.observe(el); });
+	</script>
 	<!-- End CEO Section -->
 
 	<!-- Customer One / What We Build -->
 	@php
+		$aboutServiceTitles = ['Roofing', 'Metal Framing & Drywall', 'Wood Framing'];
 		$aboutServices = \Illuminate\Support\Facades\DB::table('services')
 			->where('active_flag', 1)
 			->where('type', 'service')
-			->orderByDesc('created_at')
-			->limit(3)
+			->whereIn('service_title', $aboutServiceTitles)
+			->orderByRaw("FIELD(service_title, 'Roofing', 'Metal Framing & Drywall', 'Wood Framing')")
 			->get();
+		if ($aboutServices->isEmpty()) {
+			$aboutServices = \Illuminate\Support\Facades\DB::table('services')
+				->where('active_flag', 1)
+				->where('type', 'service')
+				->orderByRaw('order_no IS NULL, order_no ASC')
+				->limit(3)
+				->get();
+		}
 		$serviceIcons = ['customer-1.svg', 'customer-2.svg', 'customer-3.svg'];
 	@endphp
 	<section class="customer-one">
@@ -290,7 +364,7 @@
 			<div class="row clearfix">
 				<div class="counter-block_three col-lg-3 col-md-6 col-sm-12">
 					<div class="counter-block_three-inner wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-						<div class="counter-block_three-count"><span class="odometer" data-count="2"></span>M+</div>
+						<div class="counter-block_three-count"><span class="odometer" data-count="2.5"></span>M+</div>
 						<h4 class="counter-block_three-title">Sq. Ft. Delivered</h4>
 						<div class="counter-block_three-text">Successful project delivery across Texas.</div>
 					</div>
@@ -311,9 +385,9 @@
 				</div>
 				<div class="counter-block_three col-lg-3 col-md-6 col-sm-12">
 					<div class="counter-block_three-inner wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
-						<div class="counter-block_three-count"><span class="odometer" data-count="8"></span>+</div>
-						<h4 class="counter-block_three-title">Years as Company</h4>
-						<div class="counter-block_three-text">Founded in 2018, growing stronger every year.</div>
+						<div class="counter-block_three-count"><span class="odometer" data-count="400"></span>+</div>
+						<h4 class="counter-block_three-title">Completed Projects</h4>
+						<div class="counter-block_three-text">Wide range of successful projects across Texas.</div>
 					</div>
 				</div>
 			</div>
@@ -335,7 +409,7 @@
 				<div class="counter-block_one col-lg-3 col-md-6 col-sm-12">
 					<div class="counter-block_one-inner wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
 						<div class="counter-block_one-outline"></div>
-						<div class="counter-block_one-count"><span class="odometer" data-count="2"></span>M<sup>+</sup></div>
+						<div class="counter-block_one-count"><span class="odometer" data-count="2.5"></span>M<sup>+</sup></div>
 						<div class="counter-block_one-text">sq. ft. <br> delivered</div>
 					</div>
 				</div>
@@ -356,8 +430,8 @@
 				<div class="counter-block_one col-lg-3 col-md-6 col-sm-12">
 					<div class="counter-block_one-inner wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
 						<div class="counter-block_one-outline"></div>
-						<div class="counter-block_one-count"><span class="odometer" data-count="8"></span><sup>+</sup></div>
-						<div class="counter-block_one-text">years as <br> company</div>
+						<div class="counter-block_one-count"><span class="odometer" data-count="400"></span><sup>+</sup></div>
+						<div class="counter-block_one-text">completed <br> projects</div>
 					</div>
 				</div>
 			</div>

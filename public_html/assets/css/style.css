@@ -4741,7 +4741,7 @@
 
 .about-three_content-outer{
 	position:relative;
-	margin-right:-60px;
+	margin-right:0px;
 }
 
 .about-three_list{
@@ -4751,17 +4751,20 @@
 
 .about-three_list li{
 	position:relative;
-	font-size:18px;
-	font-weight:700;
-	margin-bottom:20px;
+	font-size:16px;
+	font-weight:600;
+	margin-bottom:15px;
+	padding-left:30px;
 	color:var(--black-color);
 	font-family: "Lexend Deca", sans-serif;
 }
 
 .about-three_list li i{
-	position:relative;
-	margin-right:20px;
+	position:absolute;
+	left:0;
+	top:4px;
 	color:var(--main-color);
+	font-size:16px;
 }
 
 .about-three_list li:last-child{
@@ -4770,18 +4773,19 @@
 
 .about-three_info{
 	position:relative;
-	padding:15px 40px;
-	border-radius:25px;
+	padding:20px 30px;
+	border-radius:15px;
 	background-color:#f5f5f5;
-	border:1px solid var(--black-color);
+	border:1px solid #e0e0e0;
+	margin-bottom:30px;
 }
 
 .about-three_text{
 	position:relative;
-	font-size:18px;
-	font-weight:700;
-	line-height:34px;
-	max-width:365px;
+	font-size:16px;
+	font-weight:600;
+	line-height:30px;
+	max-width:100%;
 	color:var(--black-color);
 }
 
@@ -5419,6 +5423,13 @@
 	border-radius:25px;
 	background-color:var(--white-color);
 	box-shadow:0px 0px 15px rgba(0,0,0,0.10);
+	height:100%;
+	display:flex;
+	flex-direction:column;
+}
+
+.customer-block_one{
+	margin-bottom:30px;
 }
 
 .customer-block_one-bg{
@@ -5507,11 +5518,16 @@
 	-o-transition:all 500ms ease;
 }
 
+.customer-block_one-text{
+	flex:1;
+}
+
 .customer-block_one-more{
 	position:relative;
 	font-weight:700;
 	font-size:18px;
-	margin-top:30px;
+	margin-top:auto;
+	padding-top:25px;
 	display:inline-block;
 	color:var(--main-color);
 	font-family: "Lexend Deca", sans-serif;
@@ -6630,7 +6646,7 @@
 	-ms-transition:all 300ms ease;
 	-o-transition:all 300ms ease;
 	transition:all 300ms ease;
-	background-image: linear-gradient(to right, #f9630c, #b54c0f, #773610, #3e1f0d, #040201);
+	background-image: linear-gradient(to right, #100f86, #1a19a0, #0d0c70, #080850, #040230);
 }
 
 .category-list li span{
@@ -6668,7 +6684,7 @@
 	padding:35px 50px 50px;
 	background-position:center top;
 	background-repeat:no-repeat;
-	background-color:var(--black-color);
+	background:linear-gradient(135deg, #100f86 0%, #1a19a0 50%, #2e2db5 100%);
 }
 
 .rating-widget_rating{

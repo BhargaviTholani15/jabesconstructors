@@ -5,7 +5,6 @@
 	<!-- About Sidebar -->
 	<div class="about-sidebar">
 		<div class="gradient-layer"></div>
-		<!-- Close Button -->
 		<div class="close-sidebar-widget close-button">
 			<span class="fa-solid fa-xmark fa-fw"></span>
 		</div>
@@ -16,22 +15,19 @@
 				</div>
 				<div class="content-box">
 					<h3>About <span>EM Building</span></h3>
-					<div class="text">our clients, oue employees, and our community through our commitmrnt to leadership, excellence in craft, and attention to detail.</div>
+					<div class="text">{{ $siteSettings['footer_text'] ?? '' }}</div>
 					<ul class="about-sidebar_list">
-						<li>Testimonials</li>
-						<li>Outsourcing</li>
-						<li>Privacy Policy</li>
-						<li>HR Training</li>
-						<li>Careers</li>
+						<li><a href="<?= url('/services') ?>">Services</a></li>
+						<li><a href="<?= url('/projects') ?>">Projects</a></li>
+						<li><a href="<?= url('/contact-us') ?>">Contact Us</a></li>
 					</ul>
 				</div>
 			</div>
-			<!-- Social Box -->
 			<div class="social-box">
-				<a href="https://facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
-				<a href="https://twitter.com/"><i class="fa-brands fa-twitter"></i></a>
-				<a href="https://youtube.com/"><i class="fa-brands fa-youtube"></i></a>
-				<a href="https://instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+				@if(!empty($siteSettings['facebook']))<a href="{{ $siteSettings['facebook'] }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>@endif
+				@if(!empty($siteSettings['instagram']))<a href="{{ $siteSettings['instagram'] }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>@endif
+				@if(!empty($siteSettings['linkedin']))<a href="{{ $siteSettings['linkedin'] }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>@endif
+				@if(!empty($siteSettings['youtube']))<a href="{{ $siteSettings['youtube'] }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>@endif
 			</div>
 		</div>
 	</div>
@@ -46,41 +42,65 @@
 					<li><a href="<?= url('/') ?>">Home</a></li>
 					<li>Gallery</li>
 				</ul>
-				<div class="page-title_text">Explore our hospital facilities, events, and memorable moments.</div>
+				<div class="page-title_text">Explore our construction projects, facilities, and memorable moments.</div>
 			</div>
         </div>
     </section>
     <!-- End Page Title -->
 
+	<style>
+		.gallery-tabs { display:flex; justify-content:center; gap:0; margin-bottom:50px; }
+		.gallery-tab { padding:14px 40px; font-size:15px; font-weight:700; text-transform:uppercase; letter-spacing:2px; cursor:pointer; border:none; background:#f0f0f0; color:#666; transition:all 0.4s ease; position:relative; }
+		.gallery-tab:first-child { border-radius:50px 0 0 50px; }
+		.gallery-tab:last-child { border-radius:0 50px 50px 0; }
+		.gallery-tab.active { background:var(--main-color); color:#fff; }
+		.gallery-tab:hover:not(.active) { background:#e0e0e0; color:#333; }
+		.gallery-tab i { margin-right:8px; }
+
+		.gallery-card { position:relative; overflow:hidden; border-radius:15px; margin-bottom:30px; }
+		.gallery-card_image { position:relative; overflow:hidden; }
+		.gallery-card_image img { width:100%; height:280px; object-fit:cover; display:block; transition:transform 0.6s ease; }
+		.gallery-card:hover .gallery-card_image img { transform:scale(1.08); }
+		.gallery-card_overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(16,15,134,0.5); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.4s ease; }
+		.gallery-card:hover .gallery-card_overlay { opacity:1; }
+		.gallery-card_overlay i { font-size:36px; color:#fff; width:65px; height:65px; line-height:65px; text-align:center; border:2px solid #fff; border-radius:50%; transition:transform 0.3s; }
+		.gallery-card:hover .gallery-card_overlay i { transform:scale(1.1); }
+
+		.video-card { position:relative; border-radius:15px; overflow:hidden; margin-bottom:30px; background:#000; box-shadow:0 5px 25px rgba(0,0,0,0.1); transition:transform 0.4s ease, box-shadow 0.4s ease; }
+		.video-card:hover { transform:translateY(-5px); box-shadow:0 15px 40px rgba(0,0,0,0.15); }
+		.video-card_media { position:relative; width:100%; height:250px; overflow:hidden; }
+		.video-card_media video, .video-card_media iframe { width:100%; height:100%; object-fit:cover; border:0; }
+		.video-card_info { padding:15px 18px; background:#111; display:flex; align-items:center; justify-content:space-between; }
+		.video-card_info h5 { margin:0; font-size:15px; font-weight:600; color:#fff; }
+		.vc-badge { display:inline-block; font-size:11px; padding:3px 12px; border-radius:20px; font-weight:600; }
+		.vc-badge.upload { background:var(--main-color); color:#fff; }
+		.vc-badge.url { background:#c00; color:#fff; }
+		.vc-badge.slideshow { background:#e8a317; color:#111; }
+		.video-card_slideshow { position:relative; width:100%; height:100%; }
+		.video-card_slideshow img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; transition:opacity 1s ease-in-out; }
+		.video-card_slideshow .ss-counter { position:absolute; top:12px; right:12px; background:rgba(0,0,0,0.6); color:#fff; padding:3px 10px; border-radius:20px; font-size:11px; z-index:2; }
+		.video-card_slideshow .ss-play { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:42px; color:#fff; text-shadow:0 0 15px rgba(0,0,0,0.5); opacity:0.7; z-index:2; pointer-events:none; }
+	</style>
+
 	<!-- Gallery Section -->
-	<section class="project-one style-two">
+	<section class="project-one style-two" style="padding:80px 0;">
 		<div class="auto-container">
 			<div class="sec-title centered">
 				<div class="sec-title_title">Our Gallery</div>
-				<h2 class="sec-title_heading">Explore Our Facilities <br> and Moments</h2>
+				<h2 class="sec-title_heading">Explore Our Work</h2>
 			</div>
 
-			<!-- Toggle Buttons -->
-			<div class="d-flex justify-content-center mb-5">
-				<button id="showImages" class="theme-btn btn-style-one active" style="margin-right:10px;">
-					<span class="btn-wrap">
-						<span class="text-one">Images</span>
-						<span class="text-two">Images</span>
-					</span>
-				</button>
-				<button id="showVideos" class="theme-btn btn-style-three">
-					<span class="btn-wrap">
-						<span class="text-one">Videos</span>
-						<span class="text-two">Videos</span>
-					</span>
-				</button>
+			<!-- Toggle Tabs -->
+			<div class="gallery-tabs">
+				<button id="showImages" class="gallery-tab active"><i class="fa-solid fa-images"></i> Images</button>
+				<button id="showVideos" class="gallery-tab"><i class="fa-solid fa-video"></i> Videos</button>
 			</div>
 
 			<!-- Images Section -->
 			<div id="imagesSection" class="row clearfix">
 				@foreach($data as $row)
 				@if($row->type == 'IMAGE')
-				<div class="col-lg-4 col-md-6 col-sm-12" style="margin-bottom:30px;">
+				<div class="col-lg-4 col-md-6 col-sm-12">
 					<div class="gallery-card wow fadeInUp">
 						<a href="{{ 'cloud/'.$row->image_path }}" data-lightbox="hospital-gallery" data-title="{{ $row->image_title }}">
 							<div class="gallery-card_image">
@@ -96,139 +116,10 @@
 				@endforeach
 			</div>
 
-			<style>
-				.gallery-card {
-					position: relative;
-					overflow: hidden;
-					border-radius: 15px;
-				}
-				.gallery-card_image {
-					position: relative;
-					overflow: hidden;
-				}
-				.gallery-card_image img {
-					width: 100%;
-					height: 280px;
-					object-fit: cover;
-					display: block;
-					transition: transform 0.5s ease;
-				}
-				.gallery-card:hover .gallery-card_image img {
-					transform: scale(1.1);
-				}
-				.gallery-card_overlay {
-					position: absolute;
-					top: 0;
-					left: 0;
-					width: 100%;
-					height: 100%;
-					background: rgba(16, 15, 134, 0.5);
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					opacity: 0;
-					transition: opacity 0.4s ease;
-				}
-				.gallery-card:hover .gallery-card_overlay {
-					opacity: 1;
-				}
-				.gallery-card_overlay i {
-					font-size: 40px;
-					color: #fff;
-					width: 70px;
-					height: 70px;
-					line-height: 70px;
-					text-align: center;
-					border: 2px solid #fff;
-					border-radius: 50%;
-				}
-			</style>
-
-			<style>
-				.video-card {
-					position: relative;
-					border-radius: 15px;
-					overflow: hidden;
-					margin-bottom: 30px;
-					background: #000;
-					box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-				}
-				.video-card_media {
-					position: relative;
-					width: 100%;
-					height: 250px;
-					overflow: hidden;
-				}
-				.video-card_media video,
-				.video-card_media iframe {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-					border: 0;
-				}
-				.video-card_info {
-					padding: 15px 18px;
-					background: #111;
-				}
-				.video-card_info h5 {
-					margin: 0;
-					font-size: 16px;
-					font-weight: 600;
-					color: #fff;
-				}
-				.video-card_info .vc-badge {
-					display: inline-block;
-					font-size: 11px;
-					padding: 2px 10px;
-					border-radius: 20px;
-					margin-top: 6px;
-					font-weight: 500;
-				}
-				.vc-badge.upload { background: var(--main-color); color: #fff; }
-				.vc-badge.url { background: #c00; color: #fff; }
-				.vc-badge.slideshow { background: #e8a317; color: #111; }
-				/* Slideshow inside video card */
-				.video-card_slideshow {
-					position: relative;
-					width: 100%;
-					height: 100%;
-				}
-				.video-card_slideshow img {
-					position: absolute;
-					top: 0; left: 0;
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-					transition: opacity 1s ease-in-out;
-				}
-				.video-card_slideshow .ss-counter {
-					position: absolute;
-					bottom: 8px; right: 8px;
-					background: rgba(0,0,0,0.6);
-					color: #fff;
-					padding: 3px 10px;
-					border-radius: 20px;
-					font-size: 11px;
-					z-index: 2;
-				}
-				.video-card_slideshow .ss-play {
-					position: absolute;
-					top: 50%; left: 50%;
-					transform: translate(-50%,-50%);
-					font-size: 45px;
-					color: #fff;
-					text-shadow: 0 0 15px rgba(0,0,0,0.5);
-					opacity: 0.7;
-					z-index: 2;
-					pointer-events: none;
-				}
-			</style>
-
-			<!-- Videos Section (Initially Hidden) -->
+			<!-- Videos Section -->
 			<div id="videosSection" class="row clearfix" style="display: none;">
 				@foreach($data as $row)
 
-				{{-- Type 1: Direct Video Upload --}}
 				@if($row->type == 'VIDEO')
 				<div class="col-lg-4 col-md-6 col-sm-12">
 					<div class="video-card wow fadeInUp">
@@ -245,7 +136,6 @@
 				</div>
 				@endif
 
-				{{-- Type 2: YouTube / Video URL --}}
 				@if($row->type == 'VIDEO_URL')
 				@php
 					$videoUrl = $row->video_url;
@@ -274,7 +164,6 @@
 				</div>
 				@endif
 
-				{{-- Type 3: Image Slideshow --}}
 				@if($row->type == 'VIDEO_SLIDESHOW')
 				@php $slideshowImages = json_decode($row->slideshow_images, true); @endphp
 				@if($slideshowImages && count($slideshowImages) > 0)
@@ -325,74 +214,49 @@
 		startAllSlideshows();
 	});
 
-	// Image Slideshow Engine
 	var slideshowIntervals = {};
-
 	function startAllSlideshows() {
 		document.querySelectorAll('.slideshow-container').forEach(function(container) {
 			var id = container.getAttribute('data-slideshow-id');
-			if (slideshowIntervals[id]) return; // already running
-
+			if (slideshowIntervals[id]) return;
 			var images = container.querySelectorAll('.slideshow-img-' + id);
 			if (images.length < 2) return;
-
 			var current = 0;
 			slideshowIntervals[id] = setInterval(function() {
 				images[current].style.opacity = '0';
 				current = (current + 1) % images.length;
 				images[current].style.opacity = '1';
-			}, 2500); // 2.5 seconds per image
+			}, 2500);
 		});
 	}
 
-	// Fullscreen slideshow on click
 	document.addEventListener('click', function(e) {
 		var container = e.target.closest('.slideshow-container');
 		if (!container) return;
-
 		var id = container.getAttribute('data-slideshow-id');
 		var images = container.querySelectorAll('.slideshow-img-' + id);
 		var srcs = [];
 		images.forEach(function(img) { srcs.push(img.src); });
-
-		// Create fullscreen overlay
-		var overlay = document.createElement('div');
-		overlay.id = 'slideshow-fullscreen';
-		overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:99999; display:flex; align-items:center; justify-content:center; cursor:pointer;';
-
-		var img = document.createElement('img');
-		img.style.cssText = 'max-width:90%; max-height:85vh; object-fit:contain; border-radius:8px; transition:opacity 0.8s ease;';
-		img.src = srcs[0];
-
-		var counter = document.createElement('div');
-		counter.style.cssText = 'position:absolute; bottom:30px; left:50%; transform:translateX(-50%); color:#fff; font-size:16px; background:rgba(0,0,0,0.5); padding:8px 20px; border-radius:30px;';
-
-		var closeBtn = document.createElement('div');
-		closeBtn.innerHTML = '<i class="fa fa-times"></i>';
-		closeBtn.style.cssText = 'position:absolute; top:20px; right:30px; color:#fff; font-size:30px; cursor:pointer; z-index:100000;';
-		closeBtn.onclick = function() { clearInterval(fsInterval); overlay.remove(); };
-
-		overlay.appendChild(img);
-		overlay.appendChild(counter);
-		overlay.appendChild(closeBtn);
-		document.body.appendChild(overlay);
-
-		var fsIdx = 0;
-		counter.textContent = '1 / ' + srcs.length;
-
-		var fsInterval = setInterval(function() {
-			img.style.opacity = '0';
-			setTimeout(function() {
-				fsIdx = (fsIdx + 1) % srcs.length;
-				img.src = srcs[fsIdx];
-				counter.textContent = (fsIdx + 1) + ' / ' + srcs.length;
-				img.style.opacity = '1';
-			}, 400);
+		var ov = document.createElement('div');
+		ov.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:99999;display:flex;align-items:center;justify-content:center;';
+		var im = document.createElement('img');
+		im.style.cssText = 'max-width:90%;max-height:85vh;object-fit:contain;border-radius:8px;transition:opacity 0.8s ease;';
+		im.src = srcs[0];
+		var ct = document.createElement('div');
+		ct.style.cssText = 'position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:#fff;font-size:16px;background:rgba(0,0,0,0.5);padding:8px 20px;border-radius:30px;';
+		ct.textContent = '1 / ' + srcs.length;
+		var cl = document.createElement('div');
+		cl.innerHTML = '<i class="fa fa-times"></i>';
+		cl.style.cssText = 'position:absolute;top:20px;right:30px;color:#fff;font-size:30px;cursor:pointer;z-index:100000;';
+		ov.appendChild(im); ov.appendChild(ct); ov.appendChild(cl);
+		document.body.appendChild(ov);
+		var fi = 0;
+		var si = setInterval(function(){
+			im.style.opacity='0';
+			setTimeout(function(){fi=(fi+1)%srcs.length;im.src=srcs[fi];ct.textContent=(fi+1)+' / '+srcs.length;im.style.opacity='1';},400);
 		}, 3000);
-
-		overlay.addEventListener('click', function(ev) {
-			if (ev.target === overlay) { clearInterval(fsInterval); overlay.remove(); }
-		});
+		cl.onclick = function(){clearInterval(si);ov.remove();};
+		ov.addEventListener('click',function(ev){if(ev.target===ov){clearInterval(si);ov.remove();}});
 	});
 </script>
 
