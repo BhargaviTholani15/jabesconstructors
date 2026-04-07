@@ -544,24 +544,26 @@
 				<div class="news-block_one col-lg-4 col-md-6 col-sm-12">
 					<div class="news-block_one-inner">
 						<div class="news-block_one-image_outer">
-							<div class="news-block_one-date">{{ date('d M', strtotime($blog->created_at)) }}</div>
+							<div class="news-block_one-date">{{ date('d M', strtotime($blog->published_at ?? $blog->created_at)) }}</div>
 							<div class="news-block_one-image">
 								@if(!empty($blog->blog_image))
-								<a href="{{ url('/blogs/' . $blog->slug) }}"><img src="{{ url('cloud/' . $blog->blog_image) }}" alt="{{ $blog->blog_title }}" /></a>
-								<img src="{{ url('cloud/' . $blog->blog_image) }}" alt="{{ $blog->blog_title }}" />
+								<a href="{{ url('/post/' . $blog->slug) }}"><img src="{{ url('cloud/' . $blog->blog_image) }}" alt="{{ $blog->blog_title }}" loading="lazy" style="height:240px; object-fit:cover;" /></a>
+								<img src="{{ url('cloud/' . $blog->blog_image) }}" alt="{{ $blog->blog_title }}" loading="lazy" style="height:240px; object-fit:cover;" />
 								@else
-								<a href="{{ url('/blogs/' . $blog->slug) }}"><img src="<?= url('assets/images/resource/news-1.jpg') ?>" alt="{{ $blog->blog_title }}" /></a>
-								<img src="<?= url('assets/images/resource/news-1.jpg') ?>" alt="{{ $blog->blog_title }}" />
+								<a href="{{ url('/post/' . $blog->slug) }}"><img src="<?= url('assets/images/resource/news-1.jpg') ?>" alt="{{ $blog->blog_title }}" loading="lazy" style="height:240px; object-fit:cover;" /></a>
+								<img src="<?= url('assets/images/resource/news-1.jpg') ?>" alt="{{ $blog->blog_title }}" loading="lazy" style="height:240px; object-fit:cover;" />
 								@endif
 							</div>
 						</div>
 						<div class="news-block_one-content">
 							<ul class="news-block_one-meta">
-								<li><span class="icon fa-regular fa-comments fa-fw"></span>{{ $blog->author ?? 'By Admin' }}</li>
+								<li><span class="icon fa-regular fa-user fa-fw"></span>{{ $blog->author ?? 'Admin' }}</li>
+								<li><span class="icon fa-solid fa-eye fa-fw"></span>{{ $blog->view_counts ?? 0 }}</li>
+								<li><span class="icon fa-solid fa-heart fa-fw" style="color:red;"></span>{{ $blog->likes ?? 0 }}</li>
 							</ul>
-							<h4 class="news-block_one-title"><a href="{{ url('/blogs/' . $blog->slug) }}">{{ $blog->blog_title }}</a></h4>
+							<h4 class="news-block_one-title"><a href="{{ url('/post/' . $blog->slug) }}">{{ $blog->blog_title }}</a></h4>
 							<div class="news-block_one-button">
-								<a class="news-block_one-more" href="{{ url('/blogs/' . $blog->slug) }}">READ MORE</a>
+								<a class="news-block_one-more" href="{{ url('/post/' . $blog->slug) }}">READ MORE</a>
 							</div>
 						</div>
 					</div>

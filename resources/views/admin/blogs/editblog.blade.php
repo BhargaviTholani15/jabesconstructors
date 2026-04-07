@@ -10,7 +10,10 @@
                 <div class="alert alert-danger"><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>
                 @endif
 
-                @php $selectedCats = json_decode($data->category_ids ?? '[]', true) ?? []; @endphp
+                @php
+                    $decoded = json_decode($data->category_ids ?? '[]', true);
+                    $selectedCats = is_array($decoded) ? $decoded : [];
+                @endphp
 
                 <form action="" method="POST" enctype="multipart/form-data">
                     @csrf

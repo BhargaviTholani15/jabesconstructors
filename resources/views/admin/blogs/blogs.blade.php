@@ -26,7 +26,10 @@
                         </thead>
                         <tbody>
                             @foreach($data as $i => $row)
-                            @php $catIds = json_decode($row->category_ids ?? '[]', true) ?? []; @endphp
+                            @php
+                                $decoded = json_decode($row->category_ids ?? '[]', true);
+                                $catIds = is_array($decoded) ? $decoded : [];
+                            @endphp
                             <tr>
                                 <td>{{ $i + 1 }}</td>
                                 <td>

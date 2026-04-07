@@ -74,7 +74,7 @@
 						<div style="margin-bottom:20px;">
 							@foreach($categories as $cat)
 								@if(in_array($cat->id, $selectedCats))
-								<a href="{{ url('/blogs?category=' . $cat->id) }}" style="display:inline-block; padding:4px 14px; background:rgba(16,15,134,0.1); color:var(--main-color); border-radius:20px; font-size:13px; font-weight:600; margin-right:5px; transition:all 0.3s;">{{ $cat->category }}</a>
+								<a href="{{ url('/blog/categories/' . strtolower(str_replace(' ', '-', $cat->category))) }}" style="display:inline-block; padding:4px 14px; background:rgba(16,15,134,0.1); color:var(--main-color); border-radius:20px; font-size:13px; font-weight:600; margin-right:5px; transition:all 0.3s;">{{ $cat->category }}</a>
 								@endif
 							@endforeach
 						</div>
@@ -135,7 +135,7 @@
 								@if(session('comment_success'))
 								<div class="alert alert-success" style="border-radius:10px;">{{ session('comment_success') }}</div>
 								@endif
-								<form action="{{ url('/blogs/' . $data->slug . '/comment') }}" method="POST">
+								<form action="{{ url('/post/' . $data->slug . '/comment') }}" method="POST">
 									@csrf
 									<div class="row">
 										<div class="col-md-12 mb-3">
@@ -178,7 +178,7 @@
 								<img src="{{ url('cloud/' . $recent->blog_image) }}" alt="" style="width:70px; height:70px; border-radius:10px; object-fit:cover; flex-shrink:0;" />
 								@endif
 								<div>
-									<h5 style="margin:0 0 5px; font-size:14px; line-height:20px;"><a href="{{ url('/blogs/' . $recent->slug) }}" style="color:#111;">{{ Str::limit($recent->blog_title, 50) }}</a></h5>
+									<h5 style="margin:0 0 5px; font-size:14px; line-height:20px;"><a href="{{ url('/post/' . $recent->slug) }}" style="color:#111;">{{ Str::limit($recent->blog_title, 50) }}</a></h5>
 									<small style="color:#999;"><i class="fa fa-calendar"></i> {{ \Carbon\Carbon::parse($recent->created_at)->format('d M, Y') }}</small>
 								</div>
 							</div>
@@ -190,7 +190,7 @@
 						<div class="sidebar-widget" style="background:#fff; border-radius:15px; padding:25px; box-shadow:0 3px 15px rgba(0,0,0,0.06); margin-bottom:25px;">
 							<h4 style="font-size:18px; margin-bottom:20px; padding-bottom:12px; border-bottom:2px solid var(--main-color); display:inline-block;">Categories</h4>
 							@foreach($categories as $cat)
-							<a href="{{ url('/blogs?category=' . $cat->id) }}" style="display:block; padding:10px 15px; margin-bottom:8px; background:#f8f8f8; border-radius:8px; color:#333; font-size:14px; font-weight:600; transition:all 0.3s;">
+							<a href="{{ url('/blog/categories/' . strtolower(str_replace(' ', '-', $cat->category))) }}" style="display:block; padding:10px 15px; margin-bottom:8px; background:#f8f8f8; border-radius:8px; color:#333; font-size:14px; font-weight:600; transition:all 0.3s;">
 								<i class="fa fa-angle-right" style="margin-right:8px; color:var(--main-color);"></i> {{ $cat->category }}
 							</a>
 							@endforeach
@@ -228,7 +228,7 @@
 
 	<script>
 	function likeBlog() {
-		fetch('{{ url("/blogs/" . $data->slug . "/like") }}', {
+		fetch('{{ url("/post/" . $data->slug . "/like") }}', {
 			method: 'POST',
 			headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Content-Type': 'application/json' },
 		})

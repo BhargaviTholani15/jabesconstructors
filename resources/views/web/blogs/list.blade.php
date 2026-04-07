@@ -58,25 +58,37 @@
 			<div class="d-flex justify-content-center flex-wrap" style="gap:8px; margin-bottom:40px;">
 				<a href="{{ url('/blogs') }}" style="display:inline-block; padding:8px 22px; border-radius:50px; font-size:13px; font-weight:600; transition:all 0.3s; {{ empty($activeCategory) ? 'background:var(--main-color); color:#fff;' : 'background:#f0f0f0; color:#333;' }}">All</a>
 				@foreach($blogCategories as $bc)
-				<a href="{{ url('/blogs?category=' . $bc->id) }}" style="display:inline-block; padding:8px 22px; border-radius:50px; font-size:13px; font-weight:600; transition:all 0.3s; {{ $activeCategory == $bc->id ? 'background:var(--main-color); color:#fff;' : 'background:#f0f0f0; color:#333;' }}">{{ $bc->category }}</a>
+				<a href="{{ url('/blog/categories/' . strtolower(str_replace(' ', '-', $bc->category))) }}" style="display:inline-block; padding:8px 22px; border-radius:50px; font-size:13px; font-weight:600; transition:all 0.3s; {{ $activeCategory == $bc->id ? 'background:var(--main-color); color:#fff;' : 'background:#f0f0f0; color:#333;' }}">{{ $bc->category }}</a>
 				@endforeach
 			</div>
 			@endif
 
-			<div class="row clearfix">
+			<style>
+				.blog-card-img { width:100%; height:240px; object-fit:cover; display:block; border-radius:15px 15px 0 0; }
+				.news-block_one-image { overflow:hidden; }
+				.news-block_one-image img { width:100%; height:240px; object-fit:cover; display:block; }
+				.blog-item { display:none; }
+				.blog-item.visible { display:block; }
+				.load-more-btn { display:inline-flex; align-items:center; gap:10px; padding:14px 40px; background:var(--main-color); color:#fff; font-size:15px; font-weight:700; border:none; border-radius:50px; cursor:pointer; transition:all 0.4s; }
+				.load-more-btn:hover { background:#111; transform:translateY(-3px); box-shadow:0 10px 25px rgba(0,0,0,0.2); }
+				.load-more-btn i { transition:transform 0.3s; }
+				.load-more-btn:hover i { transform:rotate(180deg); }
+			</style>
 
-				@forelse($data as $blog)
-				<div class="news-block_one col-lg-4 col-md-6 col-sm-12">
-					<div class="news-block_one-inner">
+			<div class="row clearfix" id="blogGrid">
+
+				@forelse($data as $bi => $blog)
+				<div class="news-block_one col-lg-4 col-md-6 col-sm-12 blog-item {{ $bi < 20 ? 'visible' : '' }}" data-index="{{ $bi }}">
+					<div class="news-block_one-inner wow fadeInUp" data-wow-delay="{{ ($bi % 3) * 100 }}ms">
 						<div class="news-block_one-image_outer">
-							<div class="news-block_one-date">{{ \Carbon\Carbon::parse($blog->created_at)->format('d M') }}</div>
+							<div class="news-block_one-date">{{ \Carbon\Carbon::parse($blog->published_at ?? $blog->created_at)->format('d M') }}</div>
 							<div class="news-block_one-image">
 								@if(!empty($blog->blog_image))
-								<a href="{{ url('/blogs/' . $blog->slug) }}"><img src="{{ url('cloud/' . $blog->blog_image) }}" alt="{{ $blog->blog_title }}" /></a>
-								<img src="{{ url('cloud/' . $blog->blog_image) }}" alt="{{ $blog->blog_title }}" />
+								<a href="{{ url('/post/' . $blog->slug) }}"><img src="{{ url('cloud/' . $blog->blog_image) }}" alt="{{ $blog->blog_title }}" loading="lazy" /></a>
+								<img src="{{ url('cloud/' . $blog->blog_image) }}" alt="{{ $blog->blog_title }}" loading="lazy" />
 								@else
-								<a href="{{ url('/blogs/' . $blog->slug) }}"><img src="{{ url('assets/images/resource/news-1.jpg') }}" alt="{{ $blog->blog_title }}" /></a>
-								<img src="{{ url('assets/images/resource/news-1.jpg') }}" alt="{{ $blog->blog_title }}" />
+								<a href="{{ url('/post/' . $blog->slug) }}"><img src="{{ url('assets/images/resource/news-1.jpg') }}" alt="{{ $blog->blog_title }}" loading="lazy" /></a>
+								<img src="{{ url('assets/images/resource/news-1.jpg') }}" alt="{{ $blog->blog_title }}" loading="lazy" />
 								@endif
 							</div>
 						</div>
@@ -89,9 +101,9 @@
 								<li><span class="icon fa-regular fa-clock fa-fw"></span>{{ $blog->minutes_to_read }} min</li>
 								@endif
 							</ul>
-							<h4 class="news-block_one-title"><a href="{{ url('/blogs/' . $blog->slug) }}">{{ $blog->blog_title }}</a></h4>
+							<h4 class="news-block_one-title"><a href="{{ url('/post/' . $blog->slug) }}">{{ $blog->blog_title }}</a></h4>
 							<div class="news-block_one-button">
-								<a class="news-block_one-more" href="{{ url('/blogs/' . $blog->slug) }}">READ MORE</a>
+								<a class="news-block_one-more" href="{{ url('/post/' . $blog->slug) }}">READ MORE</a>
 							</div>
 						</div>
 					</div>
@@ -103,9 +115,42 @@
 				@endforelse
 
 			</div>
+
+			@if(count($data) > 20)
+			<div class="text-center" style="margin-top:40px;" id="loadMoreWrap">
+				<button class="load-more-btn" id="loadMoreBtn" onclick="loadMoreBlogs()">
+					<i class="fa-solid fa-arrows-rotate"></i> Load More
+				</button>
+				<p style="margin-top:10px; color:#999; font-size:13px;" id="blogCounter">Showing <span id="visibleCount">20</span> of {{ count($data) }}</p>
+			</div>
+			@endif
+
 		</div>
 	</section>
 	<!-- End News One -->
+
+	<script>
+	var blogBatch = 20;
+	var totalBlogs = {{ count($data) }};
+	var currentVisible = Math.min(20, totalBlogs);
+
+	function loadMoreBlogs() {
+		var items = document.querySelectorAll('.blog-item');
+		var nextBatch = currentVisible + blogBatch;
+
+		for (var i = currentVisible; i < Math.min(nextBatch, items.length); i++) {
+			items[i].classList.add('visible');
+			items[i].style.animation = 'fadeInUp 0.5s ease forwards';
+		}
+
+		currentVisible = Math.min(nextBatch, items.length);
+		document.getElementById('visibleCount').textContent = currentVisible;
+
+		if (currentVisible >= totalBlogs) {
+			document.getElementById('loadMoreWrap').style.display = 'none';
+		}
+	}
+	</script>
 
 	@include('web.partials.marketing-marquee')
 

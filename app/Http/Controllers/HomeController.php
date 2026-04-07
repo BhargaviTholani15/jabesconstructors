@@ -25,7 +25,7 @@ class HomeController extends Controller
             ->get();
         $blogs = DB::table('blogs')
             ->where('active_flag', '1')
-            ->orderByDesc("created_at")
+            ->orderByDesc(DB::raw('COALESCE(published_at, created_at)'))
             ->limit(3)
             ->get();
         $doctors = DB::table('doctors')
@@ -134,18 +134,34 @@ class HomeController extends Controller
         return $this->wrapView('web/testimonials', ['categories' => $categories]);
     }
     //having subpages
-    public function blogs(Request $request)
+    public function blogs(Request $request, $slug = null)
     {
-        $categoryId = $request->query('category');
-        $query = DB::table('blogs')->where('active_flag', '1');
+        $categories = DB::table('blog_categories')->where('active_flag', 1)->get();
+        $activeCategory = null;
 
-        if ($categoryId) {
-            $query->where('category_ids', 'LIKE', '%' . $categoryId . '%');
+        // Check slug-based category URL: /blog/categories/{slug}
+        if ($slug) {
+            $cat = DB::table('blog_categories')
+                ->where('active_flag', 1)
+                ->whereRaw('LOWER(REPLACE(category, " ", "-")) = ?', [strtolower($slug)])
+                ->first();
+            if ($cat) {
+                $activeCategory = $cat->id;
+            }
         }
 
-        $data = $query->orderByDesc('created_at')->get();
-        $categories = DB::table('blog_categories')->where('active_flag', 1)->get();
-        $activeCategory = $categoryId;
+        // Also support query param: /blogs?category=3
+        if (!$activeCategory && $request->query('category')) {
+            $activeCategory = $request->query('category');
+        }
+
+        $query = DB::table('blogs')->where('active_flag', '1');
+
+        if ($activeCategory) {
+            $query->where('category_ids', 'LIKE', '%' . $activeCategory . '%');
+        }
+
+        $data = $query->orderByDesc(DB::raw('COALESCE(published_at, created_at)'))->get();
 
         return $this->wrapView('web/blogs/list', [
             'data' => $data,
@@ -172,7 +188,8 @@ class HomeController extends Controller
             ->get();
 
         $categories = DB::table('blog_categories')->where('active_flag', 1)->get();
-        $selectedCats = json_decode($data->category_ids ?? '[]', true) ?? [];
+        $decoded = json_decode($data->category_ids ?? '[]', true);
+        $selectedCats = is_array($decoded) ? $decoded : [];
 
         return $this->wrapView('web/blogs/details', [
             'data' => $data,

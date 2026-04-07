@@ -40,12 +40,11 @@ Route::prefix('/services')->group(function () {
     Route::get('', [HomeController::class, 'services']);
     Route::get('{service?}', [HomeController::class, 'servicesDetails']);
 });
-Route::prefix('/blogs')->group(function () {
-    Route::get('', [HomeController::class, 'blogs']);
-    Route::post('{slug}/comment', [HomeController::class, 'blogComment']);
-    Route::post('{slug}/like', [HomeController::class, 'blogLike']);
-    Route::get('{slug?}', [HomeController::class, 'blogDetails']);
-});
+Route::get('/blogs', [HomeController::class, 'blogs']);
+Route::get('/blog/categories/{slug}', [HomeController::class, 'blogs']);
+Route::get('/post/{slug}', [HomeController::class, 'blogDetails']);
+Route::post('/post/{slug}/comment', [HomeController::class, 'blogComment']);
+Route::post('/post/{slug}/like', [HomeController::class, 'blogLike']);
 
 Route::prefix('/hospitals')->group(function () {
     Route::get('', [HomeController::class, 'hospitals']);
