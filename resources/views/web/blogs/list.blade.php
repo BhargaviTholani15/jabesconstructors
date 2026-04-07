@@ -52,6 +52,17 @@
 	<!-- News One -->
 	<section class="news-one style-two">
 		<div class="auto-container">
+
+			<!-- Category Filter -->
+			@if(isset($blogCategories) && count($blogCategories) > 0)
+			<div class="d-flex justify-content-center flex-wrap" style="gap:8px; margin-bottom:40px;">
+				<a href="{{ url('/blogs') }}" style="display:inline-block; padding:8px 22px; border-radius:50px; font-size:13px; font-weight:600; transition:all 0.3s; {{ empty($activeCategory) ? 'background:var(--main-color); color:#fff;' : 'background:#f0f0f0; color:#333;' }}">All</a>
+				@foreach($blogCategories as $bc)
+				<a href="{{ url('/blogs?category=' . $bc->id) }}" style="display:inline-block; padding:8px 22px; border-radius:50px; font-size:13px; font-weight:600; transition:all 0.3s; {{ $activeCategory == $bc->id ? 'background:var(--main-color); color:#fff;' : 'background:#f0f0f0; color:#333;' }}">{{ $bc->category }}</a>
+				@endforeach
+			</div>
+			@endif
+
 			<div class="row clearfix">
 
 				@forelse($data as $blog)
@@ -71,7 +82,12 @@
 						</div>
 						<div class="news-block_one-content">
 							<ul class="news-block_one-meta">
-								<li><span class="icon fa-regular fa-comments fa-fw"></span>{{ $blog->author ?? 'By Admin' }}</li>
+								<li><span class="icon fa-regular fa-user fa-fw"></span>{{ $blog->author ?? 'Admin' }}</li>
+								<li><span class="icon fa-solid fa-eye fa-fw"></span>{{ $blog->view_counts ?? 0 }}</li>
+								<li><span class="icon fa-solid fa-heart fa-fw" style="color:red;"></span>{{ $blog->likes ?? 0 }}</li>
+								@if($blog->minutes_to_read)
+								<li><span class="icon fa-regular fa-clock fa-fw"></span>{{ $blog->minutes_to_read }} min</li>
+								@endif
 							</ul>
 							<h4 class="news-block_one-title"><a href="{{ url('/blogs/' . $blog->slug) }}">{{ $blog->blog_title }}</a></h4>
 							<div class="news-block_one-button">

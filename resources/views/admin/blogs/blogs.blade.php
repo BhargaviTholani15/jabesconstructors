@@ -1,81 +1,72 @@
 @include('admin._header')
 
-<!-- Table Start -->
 <div class="container-fluid pt-4 px-4">
-    <div class="row g-4">
+    <div class="row">
         <div class="col-12">
-            <div class=" rounded h-100 p-4">
-                <h1>Blogs <a href="{{url('_admin/secure/blog/add')}}" class="btn btn-primary">Add Blog</a></h1>
-                <!-- Success Messages from Session -->
+            <div class="rounded h-100 p-4">
+                <h1>Blogs
+                    <a href="{{url('_admin/secure/blog/add')}}" class="btn btn-primary">Add Blog</a>
+                    <a href="{{url('_admin/secure/blog-categories')}}" class="btn btn-outline-secondary">Manage Categories</a>
+                </h1>
                 @if (session('success'))
-                <div class="alert alert-success" id="success-alert">
-                    {{ session('success') }}
-                </div>
+                <div class="alert alert-success" id="success-alert">{{ session('success') }}</div>
                 @endif
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Blog Title</th>
-                                <th scope="col">Blog Image</th>
-                                <th scope="col">Blog summery</th>
-                                <th scope="col">Created At</th>
-                                <th scope="col">Action</th>
+                                <th>#</th>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Categories</th>
+                                <th>Stats</th>
+                                <th>Published</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $index = 1 ?>
-                            <?php foreach ($data as $row) : ?>
-                                <tr>
-                                    <th scope="row"><?= $index++ ?></th>
-                                    <td><?= $row->blog_title; ?><br>
-                                        Author : <b><?= $row->author; ?></b>
-                                    </td>
-                                    <td><img height="100" src="<?= url('cloud/' . $row->blog_image) ?>"></td>
-                                    <td><?= $row->blog_summery ?></td>
-                                    <td><?= $row->created_at ?></td>
-                                    <td>
-                                        <a href="<?= url('_admin/secure/blog/edit/' . $row->id) ?>" style="color:black">
-                                            <button class="btn btn-primary btn-sm">Edit</button>
-                                        </a>
-                                        <a style="color:black" href="<?= url('_admin/secure/blog/delete/' . $row->id) ?>" onclick="return confirmDelete()">
-                                            <button class="btn btn-danger btn-sm">Delete</button>
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
+                            @foreach($data as $i => $row)
+                            @php $catIds = json_decode($row->category_ids ?? '[]', true) ?? []; @endphp
+                            <tr>
+                                <td>{{ $i + 1 }}</td>
+                                <td>
+                                    @if($row->blog_image)
+                                    <img src="{{ url('cloud/' . $row->blog_image) }}" style="height:60px; border-radius:5px;">
+                                    @endif
+                                </td>
+                                <td>
+                                    <b>{{ $row->blog_title }}</b><br>
+                                    <small class="text-muted">{{ Str::limit($row->blog_summery, 60) }}</small>
+                                </td>
+                                <td>
+                                    @foreach($categories as $cat)
+                                        @if(in_array($cat->id, $catIds))
+                                        <span class="badge bg-info">{{ $cat->category }}</span>
+                                        @endif
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <small>
+                                        <i class="fa fa-eye"></i> {{ $row->view_counts ?? 0 }}
+                                        &nbsp; <i class="fa fa-heart" style="color:red;"></i> {{ $row->likes ?? 0 }}
+                                        @if($row->minutes_to_read)
+                                        &nbsp; <i class="fa fa-clock"></i> {{ $row->minutes_to_read }}min
+                                        @endif
+                                    </small>
+                                </td>
+                                <td><small>{{ $row->published_at ? date('d M Y', strtotime($row->published_at)) : date('d M Y', strtotime($row->created_at)) }}</small></td>
+                                <td>
+                                    <a href="{{ url('_admin/secure/blog/edit/' . $row->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="{{ url('_admin/secure/blog/delete/' . $row->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Delete?')">Delete</a>
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Table End -->
-
-
-<!-- Footer Start -->
-
-<!-- Footer End -->
-</div>
-<!-- Content End -->
-
-<script>
-    function confirmDelete() {
-        if (confirm("Are you sure you want to delete?")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    $(document).ready(function() {
-        // Hide error messages after 3 seconds
-        setTimeout(function() {
-            $('#success-alert').fadeOut('slow');
-        }, 3000);
-    });
-</script>
-<!-- Back to Top -->
+</div></div>
+<script>$(document).ready(function(){setTimeout(function(){$('#success-alert').fadeOut('slow');},3000);});</script>
 @include('admin._footer')

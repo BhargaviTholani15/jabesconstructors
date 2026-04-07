@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\secure\BlogCategoryController;
+use App\Http\Controllers\Admin\secure\BlogCommentController;
 use App\Http\Controllers\Admin\secure\BlogController;
 use App\Http\Controllers\Admin\secure\CkeditorController;
 use App\Http\Controllers\Admin\secure\ClientLogoController;
@@ -40,6 +42,8 @@ Route::prefix('/services')->group(function () {
 });
 Route::prefix('/blogs')->group(function () {
     Route::get('', [HomeController::class, 'blogs']);
+    Route::post('{slug}/comment', [HomeController::class, 'blogComment']);
+    Route::post('{slug}/like', [HomeController::class, 'blogLike']);
     Route::get('{slug?}', [HomeController::class, 'blogDetails']);
 });
 
@@ -149,6 +153,15 @@ Route::prefix('_admin')->group(function () {
             Route::get('edit/{id}', [BlogController::class, 'edit']);
             Route::post('edit/{id}', [BlogController::class, 'update']);
             Route::get('delete/{id}', [BlogController::class, 'delete']);
+        });
+          Route::prefix('blog-categories')->group(function () {
+            Route::get('', [BlogCategoryController::class, 'index']);
+            Route::post('save/{id?}', [BlogCategoryController::class, 'save']);
+            Route::get('delete/{id}', [BlogCategoryController::class, 'delete']);
+        });
+          Route::prefix('blog-comments')->group(function () {
+            Route::get('', [BlogCommentController::class, 'index']);
+            Route::get('delete/{id}', [BlogCommentController::class, 'delete']);
         });
         Route::get('accept/{id}', [DashboardController::class, 'statusAccept']);
         Route::get('cancle/{id}', [DashboardController::class, 'statusCancle']);

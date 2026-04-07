@@ -134,14 +134,23 @@ class HomeController extends Controller
         return $this->wrapView('web/testimonials', ['categories' => $categories]);
     }
     //having subpages
-    public function blogs()
+    public function blogs(Request $request)
     {
-        $data = DB::table('blogs')
-            ->where('active_flag', '1')
-            ->orderByDesc("created_at")
-            ->get();
+        $categoryId = $request->query('category');
+        $query = DB::table('blogs')->where('active_flag', '1');
+
+        if ($categoryId) {
+            $query->where('category_ids', 'LIKE', '%' . $categoryId . '%');
+        }
+
+        $data = $query->orderByDesc('created_at')->get();
+        $categories = DB::table('blog_categories')->where('active_flag', 1)->get();
+        $activeCategory = $categoryId;
+
         return $this->wrapView('web/blogs/list', [
-            'data' => $data
+            'data' => $data,
+            'blogCategories' => $categories,
+            'activeCategory' => $activeCategory,
         ]);
     }
     public function blogDetails($url)
@@ -152,9 +161,49 @@ class HomeController extends Controller
         if (empty($data)) {
             return back();
         }
+        // Increment view count
+        DB::table('blogs')->where('id', $data->id)->increment('view_counts');
+        $data->view_counts++;
+
+        $comments = DB::table('blog_comments')
+            ->where('blog_id', $data->id)
+            ->where('active_flag', 1)
+            ->orderByDesc('created_at')
+            ->get();
+
+        $categories = DB::table('blog_categories')->where('active_flag', 1)->get();
+        $selectedCats = json_decode($data->category_ids ?? '[]', true) ?? [];
+
         return $this->wrapView('web/blogs/details', [
-            'data' => $data
+            'data' => $data,
+            'comments' => $comments,
+            'categories' => $categories,
+            'selectedCats' => $selectedCats,
         ]);
+    }
+
+    public function blogComment($slug, Request $request)
+    {
+        $request->validate(['name' => 'required', 'comment' => 'required']);
+        $blog = DB::table('blogs')->where('slug', $slug)->first();
+        if (!$blog) return back();
+
+        DB::table('blog_comments')->insert([
+            'blog_id' => $blog->id,
+            'name' => $request->input('name'),
+            'comment' => $request->input('comment'),
+            'created_at' => now(),
+        ]);
+        return back()->with('comment_success', 'Comment posted successfully!');
+    }
+
+    public function blogLike($slug)
+    {
+        $blog = DB::table('blogs')->where('slug', $slug)->first();
+        if ($blog) {
+            DB::table('blogs')->where('id', $blog->id)->increment('likes');
+        }
+        return response()->json(['likes' => $blog->likes + 1]);
     }
     public function services()
     {

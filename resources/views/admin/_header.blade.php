@@ -77,6 +77,8 @@
                     <a href="{{url('_admin/secure/project-items') }}" id="projects-link" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Projects</a>
                     <a href="{{url('_admin/secure/faqs') }}" id="faqs-link" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>FAQ's</a>
                     <a href="{{url('_admin/secure/blog') }}" id="blogs-link" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Blogs</a>
+                    <a href="{{url('_admin/secure/blog-categories') }}" id="blog-cat-link" class="nav-item nav-link " style="padding-left:40px; font-size:13px;"><i class="fa fa-tags me-2"></i>Blog Categories</a>
+                    <a href="{{url('_admin/secure/blog-comments') }}" id="blog-comment-link" class="nav-item nav-link " style="padding-left:40px; font-size:13px;"><i class="fa fa-comments me-2"></i>Blog Comments</a>
                     <a href="{{url('_admin/secure/images') }}" id="image-link" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Gallery Images</a>
                     <a href="{{url('_admin/secure/videos') }}" id="video-link" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Gallery Videos</a>
                     <a href="{{url('_admin/secure/testimonials') }}" id="testimonials-link" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Testimonials</a>

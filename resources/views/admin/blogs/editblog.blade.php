@@ -1,64 +1,105 @@
 @include('admin._header')
 
-<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="card" style="width: 80%; padding: 20px;">
-        <h3 class="text-center">Edit Blog</h3>
+<div class="container-fluid pt-4 px-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card p-4">
+                <h3 class="text-center">Edit Blog</h3>
 
-        @if ($errors->any())
-        <div class="alert alert-danger" id="error-alert">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-        @if(session('error'))
-        <div class="alert alert-success">
-            {{ session('error') }}
-        </div>
-        @endif
-        <form action="" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" name="title" id="title" class="form-control" value="{{$data->blog_title}}">
-            </div>
-            <br>
-            <div>
-                <img height="100" src="{{ url('cloud/' . $data->blog_image) }}">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="image">Image</label><span style="color:green">(OPTIONAL)</span>
-                <input type="file" name="image" id="image" class="form-control">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="inner_image">Inner Page Image</label><span style="color:green">(OPTIONAL)</span><br>
-                @if(!empty($data->inner_image))
-                    <img height="100" src="{{ url('cloud/' . $data->inner_image) }}"><br><br>
+                @if ($errors->any())
+                <div class="alert alert-danger"><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>
                 @endif
-                <input type="file" name="inner_image" id="inner_image" class="form-control">
+
+                @php $selectedCats = json_decode($data->category_ids ?? '[]', true) ?? []; @endphp
+
+                <form action="" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group mb-3">
+                                <label>Title *</label>
+                                <input type="text" name="title" class="form-control" value="{{ $data->blog_title }}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label>Author</label>
+                                <input type="text" name="author" class="form-control" value="{{ $data->author }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label>Main Image</label> <span class="text-success">(Optional - keep current)</span>
+                                @if($data->blog_image)
+                                <br><img src="{{ url('cloud/' . $data->blog_image) }}" style="height:80px; border-radius:5px; margin-bottom:8px;">
+                                @endif
+                                <input type="file" name="image" class="form-control" accept="image/*">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label>Inner Page Image</label> <span class="text-success">(Optional)</span>
+                                @if(!empty($data->inner_image))
+                                <br><img src="{{ url('cloud/' . $data->inner_image) }}" style="height:80px; border-radius:5px; margin-bottom:8px;">
+                                @endif
+                                <input type="file" name="inner_image" class="form-control" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label>Categories</label>
+                                <select name="category_ids[]" class="form-select" multiple style="height:100px;">
+                                    @foreach($categories as $cat)
+                                    <option value="{{ $cat->id }}" {{ in_array($cat->id, $selectedCats) ? 'selected' : '' }}>{{ $cat->category }}</option>
+                                    @endforeach
+                                </select>
+                                <small class="text-muted">Hold Ctrl to select multiple</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label>Publish Date</label>
+                                <input type="datetime-local" name="published_at" class="form-control" value="{{ $data->published_at ? date('Y-m-d\TH:i', strtotime($data->published_at)) : '' }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label>Minutes to Read</label>
+                                <input type="number" name="minutes_to_read" class="form-control" value="{{ $data->minutes_to_read }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label>Views: <strong>{{ $data->view_counts ?? 0 }}</strong></label>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Likes: <strong>{{ $data->likes ?? 0 }}</strong></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Summary / Excerpt *</label>
+                        <textarea name="summary" class="form-control" rows="2" required>{{ $data->blog_summery }}</textarea>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Full Content *</label>
+                        <textarea name="long_description" id="description" class="form-control" rows="10" required>{{ $data->blog_description }}</textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update Blog</button>
+                    <a href="{{ url('_admin/secure/blog-categories') }}" class="btn btn-outline-secondary">Manage Categories</a>
+                </form>
             </div>
-            <br>
-            <div class="form-group">
-                <label for="summary">Summary</label>
-                <textarea name="summary" id="summary" class="form-control" rows="2">{{$data->blog_summery}}</textarea>
-            </div>
-            <br>
-              <div class="form-group">
-                <label for="author">Author</label>
-                <input type="text" name="author" id="author" class="form-control" value="{{$data->author}}">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="long_description">Long Description</label>
-                <textarea name="long_description" id="description" class="form-control" rows="10">{{$data->blog_description}}</textarea>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary btn-block">Update</button>
-        </form>
+        </div>
     </div>
 </div>
 
@@ -69,4 +110,5 @@
         filebrowserUploadMethod: 'form'
     });
 </script>
+
 @include('admin._footer')
